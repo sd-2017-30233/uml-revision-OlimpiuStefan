@@ -1,0 +1,58 @@
+	I chose the Observer design patter. An item in a store has price and stock and someone has to be notified when
+one of them is changed.
+	Here is the code:
+
+public class Item extends Observable {
+	private String name;
+	private intstock;
+	private double price;
+	public Item (String s, int q, double p) {
+		this.name = s;
+		this.stock = q;
+		this.price = p;
+	}
+	public String getName() {return name;}
+	public int getStock() { return stock;}
+	public double getPrice() { return price;}
+
+ 	public void setStock(intq) {
+		 this.stock = q;
+ 		setChanged();
+ 		notifyObservers(new Integer(q));
+	 }
+ 	public void setPrice(intp) {
+ 		this.price = p;
+ 		setChanged();
+ 		notifyObservers(new Double(p));
+	}
+}
+
+public class PriceObserver implements Observer {
+	private double price;
+ 	public PriceObserver() {
+ 		price = 0.0d;
+		 System.out.println(“PriceObserver:created –price: “ + price);
+ 	}
+ 	public void update(Observable obs, Object obj){
+ 		if(obj instanceofDouble) {
+ 			price = ((Double)obj).doubleValue();
+ 			System.out.println(“PriceObserver:changed to: “ + price);
+ 		}
+ 		else System.out.println(“PriceObserver:other changes);
+	}
+}
+
+public class StockObserver implements Observer {
+ private integer stock;
+ 	public StockObserver() {
+ 		stock = 0.0d;
+ 		System.out.println(“PriceObserver: created –price: “ + stock);
+ 	}
+ 	public void update(Observable obs, Object obj) {
+ 		if(obj instanceof Integer) {
+ 			stock = ((Integer)obj).intValue();
+			 System.out.println(“PriceObserver:changed to: “ + stock);
+		 }
+		 else System.out.println(“PriceObserver:other changes);
+ 	}
+}
